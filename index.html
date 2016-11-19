@@ -1,0 +1,60 @@
+ <!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Psychic Game</title>
+  </head>
+  <body>
+
+    <h1>Guess what letter I'm thinking of</h1>
+
+
+    <div>Total Wins: <span id='countWins'></span></div>
+    <div>Total Losses: <span id='countLosses'></span></div>
+    <div>Guesses Left: <span id='countGuessesLeft'></span></div>
+    <div>Your Guesses So Far: <span id='countNumGuesses'></span></div>
+    <div>Player Letters: <span id='playerLetters'></span></div>
+
+
+    <script type='text/javascript'>
+        // Declare vars and make an Array of letters and one of playerLetters.
+        var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        var playerLetters = [];
+        var randomPick;
+        var maxGuesses = 10; 
+        var playerGuess; 
+        var countWins = 0;     
+        var countLosses = 0;
+        var countGuessesLeft = 0;
+        var countNumGuesses = 0;
+            // Each time it asks the user for a letter.
+
+
+        document.onkeypress = function(event){              
+          var key = event.key;
+          randomPick = letters[Math.floor(Math.random()*letters.length)];
+          playerGuess = key.toLowerCase();     
+      
+          var indexGuess = letters.indexOf(playerGuess);         
+          if (indexGuess !== -1) {
+            if (maxGuesses >0) {
+              playerLetters.push(playerGuess);
+              document.querySelector('#playerLetters').innerHTML = playerLetters;
+              countNumGuesses++;
+              document.querySelector('#countNumGuesses').innerHTML = countNumGuesses;
+              if (randomPick == playerGuess) {
+                countWins++;
+                document.querySelector('#countWins').innerHTML = countWins;
+              } 
+              else {
+                countLosses++;
+                document.querySelector('#countLosses').innerHTML = countLosses;
+              }
+              maxGuesses--;
+              document.querySelector('#countGuessesLeft').innerHTML = maxGuesses;
+            } 
+          }      
+        }  
+    </script>   
+  </body>
+</html>
